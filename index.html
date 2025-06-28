@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Keyword Bank - Final Version</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Keyword Bank</h1>
+    
+    <div class="controls-wrapper">
+        <div class="main-controls-grid">
+            <div class="input-group">
+                <input type="text" id="themeInput" placeholder="Judul Tema" autocomplete="off" />
+                <div class="input-row">
+                    <select id="categorySelect">
+                        <option value="" disabled selected>Pilih Kategori...</option>
+                        <option value="Graphic Template">Graphic Template</option>
+                        <option value="Presentation">Presentation</option>
+                        <option value="Social Media">Social Media</option>
+                        <option value="custom">-- Kategori Lain --</option>
+                    </select>
+                    <input type="text" id="customCategoryInput" placeholder="Kategori Custom..." class="hidden">
+                </div>
+            </div>
+
+            <textarea id="keywordInput" placeholder="Masukkan keyword dipisahkan koma (,) atau baris baru (enter)..." autocomplete="off"></textarea>
+            
+            <div class="actions-group">
+                <button id="addThemeBtn" type="button">
+                    <span class="material-symbols-outlined">add_circle</span>Tambah Tema
+                </button>
+                <button id="downloadBtn" type="button" class="secondary">
+                    <span class="material-symbols-outlined">download</span>Download JSON
+                </button>
+                <button id="importBtn" type="button" class="secondary">
+                    <span class="material-symbols-outlined">upload</span>Import JSON
+                </button>
+                <input type="file" id="fileInput" accept=".json" class="hidden" />
+            </div>
+        </div>
+
+        <details class="batch-section">
+            <summary class="batch-title">
+                <span class="material-symbols-outlined">data_object</span>
+                <span>Batch Input via JSON</span>
+            </summary>
+            <div class="batch-content">
+                <textarea id="batchJsonInput" placeholder="Tempelkan array JSON Anda di sini..."></textarea>
+                <button id="addBatchBtn" type="button">Tambah dari JSON</button>
+            </div>
+        </details>
+        
+        <div class="search-group">
+            <input type="text" id="searchTheme" placeholder="Cari judul tema..." autocomplete="off" />
+            <input type="text" id="searchKeyword" placeholder="Cari keyword..." autocomplete="off" />
+            <select id="sortSelect">
+                <option value="all">Filter: Semua Kategori</option>
+                <option value="latest">Filter: Terbaru</option>
+            </select>
+            <button id="clearSearchBtn" type="button" class="secondary" title="Bersihkan Pencarian">
+              <span class="material-symbols-outlined">backspace</span>Clear
+            </button>
+        </div>
+    </div>
+    
+    <section class="table-section">
+      <div class="section-header">
+        <h2>Daftar Tema & Keyword</h2>
+        <div class="section-actions">
+          <div class="total-counter">
+            <span id="totalThemes">0</span>
+            <span>tema</span>
+          </div>
+          <button class="btn btn-danger btn-bulk-delete hidden" id="bulkDeleteBtn">
+            <span class="material-symbols-outlined">delete_forever</span>
+            <span id="bulkDeleteCount">Hapus (0)</span>
+          </button>
+          <button class="btn btn-danger" id="resetButton" title="Reset semua data">
+            <span class="material-symbols-outlined">delete_sweep</span>
+            Reset
+          </button>
+        </div>
+      </div>
+      <div class="table-container">
+        <table class="theme-table" aria-live="polite">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="selectAllCheckbox" title="Pilih semua di halaman ini"></th>
+              <th>No.</th>
+              <th>Tema</th>
+              <th>Kategori</th>
+              <th>Keywords</th>
+              <th>Jumlah</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="themeTableBody"></tbody>
+        </table>
+      </div>
+      <nav class="pagination" id="pagination" aria-label="Navigasi halaman"></nav>
+    </section>
+  </main>
+
+  <button class="fab" aria-label="Scroll ke atas" title="Scroll ke atas" type="button">
+    <span class="material-symbols-outlined">keyboard_arrow_up</span>
+  </button>
+  <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
